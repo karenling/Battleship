@@ -5,15 +5,14 @@ var Board = BattleshipGame.Board = function(player) {
   this.generateShips();
 };
 
-Board.prototype.checkAlive = function() {
+Board.prototype.isDead = function() {
   if (this.wounds === 15) {
-    alert(this.player + " dead!");
+    return true;
   }
 };
 
 Board.prototype.sinkShip = function() {
   this.wounds++;
-  this.checkAlive();
 };
 
 _blankBoard = function() {

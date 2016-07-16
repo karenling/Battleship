@@ -36,10 +36,13 @@ Game.prototype.sinkShip = function(player, row, col) {
         // selects ship to sink
         ship.coords.splice(idx, 1);
         board.sinkShip();
+        if (board.isDead()) {
+          alert(board.player + " dead!");
+        }
       }
     });
   });
-  board.grid[col][row] = "hihihi";
+  board.grid[col][row] = "sunk";
   board.render();
 };
 
