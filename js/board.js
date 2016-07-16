@@ -1,7 +1,19 @@
 var Board = BattleshipGame.Board = function(player) {
   this.player = player;
   this.grid = _blankBoard();
+  this.wounds = 0;
   this.generateShips();
+};
+
+Board.prototype.checkAlive = function() {
+  if (this.wounds === 15) {
+    alert(this.player + " dead!");
+  }
+};
+
+Board.prototype.sinkShip = function() {
+  this.wounds++;
+  this.checkAlive();
 };
 
 _blankBoard = function() {
@@ -34,4 +46,5 @@ Board.prototype.render = function() {
   this.grid.forEach(function(row) {
     console.log(row);
   });
+  console.log("")
 };

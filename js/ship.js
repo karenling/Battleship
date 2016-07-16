@@ -5,16 +5,12 @@ var Ship = BattleshipGame.Ship = function(ships, length) {
   this.coords = _generateValidShip(this.length, this.direction, this.ships);
 };
 
-Ship.prototype.tryToSink = function() {
-
-};
-
 _pickOne = function() {
   return Math.round(Math.random());
 };
 
 _getRandomInt = function() {
-  return Math.ceil(Math.random() * (9 - 0) + 0);
+  return Math.floor(Math.random() * (10 - 0) + 0);
 };
 
 _generateValidShip = function(length, direction, otherShips) {

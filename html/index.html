@@ -4,10 +4,17 @@
 <script type="text/javascript" src="../js/board.js"></script>
 
 <div id="container"></div>
-
+<input type="checkbox" id="show-ships"/> Show ships?
 <script type="text/javascript">
   $(document).ready(function() {
-    var game = new BattleshipGame.Game($('#container'))
+    var game = new BattleshipGame.Game($('#container'));
+    $('#show-ships').change(function() {
+      if ($(this).is(':checked')) {
+        $('.cell').addClass('show-ship')
+      } else {
+        $('.cell').removeClass('show-ship')
+      }
+    })
   })
 </script>
 
@@ -27,9 +34,12 @@
     display: inline-block;
   }
   .cell.ship {
+    background-color: rgba(141, 198, 211, 0.5);
+  }
+  .cell.ship.show-ship {
     background-color: #ccc;
   }
-  .cell.sunk {
+  .cell.ship.sunk {
     background-color: red;
   }
   .cell.missed {
