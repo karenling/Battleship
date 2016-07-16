@@ -19,8 +19,8 @@ Game.prototype.renderSinkShip = function($target) {
   var player = $target.closest('.board').attr('id');
   var row = $target.data('row');
   var col = $target.data('col');
-  this.sinkShip(player, row, col);
   if ($target.hasClass('ship')) {
+    this.sinkShip(player, row, col);
     $('#' + player + ' .row-' + row + '.col-' + col).addClass('sunk');
   } else {
     $('#' + player + ' .row-' + row + '.col-' + col).addClass('missed');
@@ -42,7 +42,6 @@ Game.prototype.sinkShip = function(player, row, col) {
     });
   });
   board.grid[col][row] = "sunk";
-  // board.render(); // TODO clean up
 };
 
 Game.prototype.blankBoard = function(player) {
@@ -60,7 +59,10 @@ Game.prototype.blankBoard = function(player) {
 };
 
 Game.prototype.setupBoard = function(board) {
-  this.$el.before(this.blankBoard(board.player));
+  this.$el.append($('<div>')
+    .addClass('player')
+    .append($('<div class="player-name">' + board.player + '</div>'))
+    .append(this.blankBoard(board.player)));
   this.addShips(board);
 };
 

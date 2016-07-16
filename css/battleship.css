@@ -1,6 +1,12 @@
 body {
   font-family: sans-serif;
 }
+.player {
+  display: inline-block;
+}
+.player-name {
+  text-align: center;
+}
 .board {
   display: inline-block;
   border-left: 1px solid #8dc6d3;
