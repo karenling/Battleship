@@ -1,0 +1,38 @@
+.board {
+  display: inline-block;
+  border-left: 1px solid #8dc6d3;
+  border-top: 1px solid #8dc6d3;
+  margin: 20px;
+}
+.cell {
+  border-right: 1px solid #8dc6d3;
+  border-bottom: 1px solid #8dc6d3;
+  background-color: rgba(141, 198, 211, 0.5);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+.cell.ship {
+  background-color: rgba(141, 198, 211, 0.5);
+}
+.cell.show-ship.ship-0 {
+  background-color: #555;
+}
+.cell.show-ship.ship-1 {
+  background-color: #777;
+}
+.cell.show-ship.ship-2 {
+  background-color: #999;
+}
+.cell.show-ship.ship-3 {
+  background-color: #bbb;
+}
+.cell.show-ship.ship-4 {
+  background-color: #ddd;
+}
+.cell.ship.sunk {
+  background-color: red;
+}
+.cell.missed {
+  background-color: white;
+}

@@ -61,9 +61,9 @@ Game.prototype.setupBoard = function(board) {
 };
 
 Game.prototype.addShips = function(board) {
-  board.ships.forEach(function(ship) {
+  board.ships.forEach(function(ship, idx) {
     ship.coords.forEach(function(coord) {
-      $('#' + board.player + ' .cell.row-' + coord[1] + '.col-' + coord[0]).addClass('ship');
+      $('#' + board.player + ' .cell.row-' + coord[1] + '.col-' + coord[0]).addClass('ship ship-' + idx);
     });
   });
 };
