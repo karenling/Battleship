@@ -10,7 +10,6 @@ var Game = BattleshipGame.Game = function($el) {
   this.board2 = new BattleshipGame.Board('player2');
   this.setupBoard(this.board1);
   this.setupBoard(this.board2);
-  this.board1.render();
   $('.board').click(function(e) {
     this.renderSinkShip($(e.target));
   }.bind(this));
@@ -43,7 +42,7 @@ Game.prototype.sinkShip = function(player, row, col) {
     });
   });
   board.grid[col][row] = "sunk";
-  board.render();
+  // board.render(); // TODO clean up
 };
 
 Game.prototype.blankBoard = function(player) {
@@ -51,7 +50,9 @@ Game.prototype.blankBoard = function(player) {
   for(var i = 0; i < 10; i++) {
     var $row = $('<div class="row"></div>');
     for(var j = 0; j < 10; j++) {
-      $row.append($('<div>').addClass('cell row-' + j + ' col-' + i).data('row', j).data('col', i));
+      $row.append($('<div>')
+        .addClass('cell row-' + j + ' col-' + i)
+        .data('row', j).data('col', i));
     }
     board.append($row);
   }
@@ -66,7 +67,8 @@ Game.prototype.setupBoard = function(board) {
 Game.prototype.addShips = function(board) {
   board.ships.forEach(function(ship, idx) {
     ship.coords.forEach(function(coord) {
-      $('#' + board.player + ' .cell.row-' + coord[1] + '.col-' + coord[0]).addClass('ship ship-' + idx);
+      $('#' + board.player + ' .cell.row-' + coord[1] + '.col-' + coord[0])
+        .addClass('ship ship-' + idx);
     });
   });
 };

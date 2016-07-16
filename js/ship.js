@@ -2,42 +2,31 @@ var Ship = BattleshipGame.Ship = function(ships, length) {
   this.ships = ships;
   this.length = length;
   this.direction = ['vertical', 'horizontal'][_pickOne()];
-  this.coords = _generateValidShip(this.length, this.direction, this.ships);
+  this.coords = this.generateValidShip();
 };
 
-_pickOne = function() {
-  return Math.round(Math.random());
-};
-
-_getRandomInt = function() {
-  return Math.floor(Math.random() * (10 - 0) + 0);
-};
-
-_generateValidShip = function(length, direction, otherShips) {
-  // generate potential ship
-  var potentialCoords = _generatePotentialShip(length, direction);
-
-  // keep checking if ship is within bounds, and keep resetting ship until it is within bounds
-  while (!_coordsAreInBounds(potentialCoords, otherShips)) {
-    potentialCoords = _generatePotentialShip(length, direction);
-  }
-
+Ship.prototype.generateValidShip = function() {
+  do {
+    potentialCoords = this.generatePotentialShip();
+  } while (!this.areCoordsValid(potentialCoords));
   return potentialCoords;
 };
 
-_coordsAreInBounds = function(potentialCoords, otherShips) {
+Ship.prototype.areCoordsValid = function(potentialCoords) {
   var takenSpots = [];
-  otherShips.forEach(function(ship) {
+  this.ships.forEach(function(ship) {
     takenSpots = takenSpots.concat(ship.coords);
   });
 
   var valid = true;
   potentialCoords.forEach(function(coord) {
+    if (!valid) return;
     if (coord[0] > 9 || coord[1] > 9) {
       valid = false;
       return;
     }
     takenSpots.forEach(function(takenCoord) {
+      if (!valid) return;
       if (takenCoord.toString() == coord.toString()) {
         valid = false;
         return;
@@ -47,22 +36,30 @@ _coordsAreInBounds = function(potentialCoords, otherShips) {
   return valid;
 };
 
-_generatePotentialShip = function(length, direction) {
+Ship.prototype.generatePotentialShip = function() {
   var potentialStartPointX = _getRandomInt();
   var potentialStartPointY = _getRandomInt();
   var potentialCoords = [[potentialStartPointX, potentialStartPointY]];
   var newVal;
 
-  if (direction === 'vertical') {
+  if (this.direction === 'vertical') {
     newVal = potentialStartPointX + 1;
-    while (potentialCoords.length < length) {
+    while (potentialCoords.length < this.length) {
       potentialCoords.push([newVal++, potentialStartPointY]);
     }
   } else {
     newVal = potentialStartPointY + 1;
-    while (potentialCoords.length < length) {
+    while (potentialCoords.length < this.length) {
       potentialCoords.push([potentialStartPointX, newVal++]);
     }
   }
   return potentialCoords;
+};
+
+_pickOne = function() {
+  return Math.round(Math.random());
+};
+
+_getRandomInt = function() {
+  return Math.floor(Math.random() * (10 - 0) + 0);
 };
