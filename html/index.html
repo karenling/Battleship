@@ -3,9 +3,36 @@
 <script type="text/javascript" src="../js/ship.js"></script>
 <script type="text/javascript" src="../js/board.js"></script>
 
+<div id="container"></div>
+
 <script type="text/javascript">
   $(document).ready(function() {
-    window.battleship = new BattleshipGame.Board();
-    window.battleship.render();
+    var game = new BattleshipGame.Game($('#container'))
   })
 </script>
+
+<style type="text/css">
+  .board {
+    display: inline-block;
+    border-left: 1px solid #8dc6d3;
+    border-top: 1px solid #8dc6d3;
+    margin: 20px;
+  }
+  .cell {
+    border-right: 1px solid #8dc6d3;
+    border-bottom: 1px solid #8dc6d3;
+    background-color: rgba(141, 198, 211, 0.5);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+  .cell.ship {
+    background-color: #ccc;
+  }
+  .cell.sunk {
+    background-color: red;
+  }
+  .cell.missed {
+    background-color: white;
+  }
+</style>
