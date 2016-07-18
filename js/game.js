@@ -11,6 +11,7 @@ var Game = BattleshipGame.Game = function($el) {
   this.currentPlayer = this.board1.player
   this.setupBoard(this.board1);
   this.setupBoard(this.board2);
+  this.setupGame();
   $('.board').click(function(e) {
     this.renderSinkShip($(e.target));
   }.bind(this));
@@ -41,6 +42,7 @@ Game.prototype.setCurrentPlayer = function() {
   } else {
     this.currentPlayer = this.board1.player;
   }
+  this.playerTurnAnnouncement();
 };
 
 Game.prototype.sinkShip = function(player, row, col) {
@@ -76,9 +78,24 @@ Game.prototype.blankBoard = function(player) {
 Game.prototype.setupBoard = function(board) {
   this.$el.append($('<div>')
     .addClass('player')
-    .append($('<div class="player-name">' + board.player + '</div>'))
+    .append($('<div class="player-name">' + _humanizePlayer(board.player) + '</div>'))
     .append(this.blankBoard(board.player)));
   this.addShips(board);
+
+};
+
+_humanizePlayer = function(currentPlayer) {
+  return (currentPlayer === 'player1' ? 'Player 1' : 'Player 2');
+};
+
+Game.prototype.playerTurnAnnouncement = function() {
+  $('.announcement').html(_humanizePlayer(this.currentPlayer) + "'s turn");
+};
+
+Game.prototype.setupGame = function() {
+  this.$el.prepend($('<div>')
+          .addClass("announcement"));
+  this.playerTurnAnnouncement();
   $('#player2').addClass('disabled');
   _toggleRevealShips();
 };

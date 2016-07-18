@@ -4,11 +4,12 @@
 <script type="text/javascript" src="../js/board.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/battleship.css" />
 
-<h1>Battleship</h1>
+<h1 id="battleship-title">Battleship</h1>
 <div id="container"></div>
-<input type="checkbox" id="show-ships"/> Show ships?
-<br/>
-<button id="reset-game">Reset Game?</button>
+<div class="options">
+  <input type="checkbox" id="show-ships"/> Show ships?
+  <button id="reset-game">Reset Game?</button>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function() {

@@ -1,11 +1,27 @@
 body {
   font-family: sans-serif;
+  margin: 15px;
+}
+#battleship-title {
+  text-align: center;
+}
+#container, .options {
+  width: 502px;
+  margin: auto auto;
+  text-align: center;
 }
 .player {
   display: inline-block;
 }
 .player-name {
   text-align: center;
+}
+.announcement {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  margin: 20px;
 }
 .board {
   display: inline-block;
