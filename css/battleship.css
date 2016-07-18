@@ -14,6 +14,9 @@ body {
   margin: 20px;
   line-height: 0;
 }
+.board.disabled {
+  opacity: 0.5;
+}
 .cell {
   border-right: 1px solid #8dc6d3;
   border-bottom: 1px solid #8dc6d3;

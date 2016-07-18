@@ -8,6 +8,7 @@ var Game = BattleshipGame.Game = function($el) {
   this.$el = $el;
   this.board1 = new BattleshipGame.Board('player1');
   this.board2 = new BattleshipGame.Board('player2');
+  this.currentPlayer = this.board1.player
   this.setupBoard(this.board1);
   this.setupBoard(this.board2);
   $('.board').click(function(e) {
@@ -19,6 +20,12 @@ Game.prototype.renderSinkShip = function($target) {
   var player = $target.closest('.board').attr('id');
   var row = $target.data('row');
   var col = $target.data('col');
+  if ($target.closest('.board').attr('id') !== this.currentPlayer) {
+    return;
+  }
+  if (!($target.hasClass('sunk') || $target.hasClass('missed'))) {
+    this.setCurrentPlayer();
+  }
   if ($target.hasClass('ship')) {
     this.sinkShip(player, row, col);
     $('#' + player + ' .row-' + row + '.col-' + col).addClass('sunk');
@@ -27,12 +34,20 @@ Game.prototype.renderSinkShip = function($target) {
   }
 };
 
+Game.prototype.setCurrentPlayer = function() {
+  $('#player1, #player2').toggleClass('disabled');
+  if (this.currentPlayer === this.board1.player) {
+    this.currentPlayer = this.board2.player;
+  } else {
+    this.currentPlayer = this.board1.player;
+  }
+};
+
 Game.prototype.sinkShip = function(player, row, col) {
   board = (player === 'player1' ? this.board1 : this.board2);
   board.ships.forEach(function(ship) {
     ship.coords.forEach(function(coord, idx) {
       if (coord.toString() === col + "," + row) {
-        // selects ship to sink
         ship.coords.splice(idx, 1);
         board.sinkShip();
         if (board.isDead()) {
@@ -64,6 +79,7 @@ Game.prototype.setupBoard = function(board) {
     .append($('<div class="player-name">' + board.player + '</div>'))
     .append(this.blankBoard(board.player)));
   this.addShips(board);
+  $('#player2').addClass('disabled');
 };
 
 Game.prototype.addShips = function(board) {
