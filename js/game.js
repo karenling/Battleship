@@ -80,6 +80,7 @@ Game.prototype.setupBoard = function(board) {
     .append(this.blankBoard(board.player)));
   this.addShips(board);
   $('#player2').addClass('disabled');
+  _toggleRevealShips();
 };
 
 Game.prototype.addShips = function(board) {
@@ -90,3 +91,21 @@ Game.prototype.addShips = function(board) {
     });
   });
 };
+
+_toggleRevealShips = function() {
+  $('#show-ships').change(function() {
+    if ($(this).is(':checked')) {
+      $('.cell').addClass('show-ship');
+    } else {
+      $('.cell').removeClass('show-ship');
+    }
+  });
+};
+
+$(document).ready(function() {
+  $('#reset-game').click(function() {
+    $('#container').html('');
+    $('#show-ships').prop('checked', false);
+    new BattleshipGame.Game($('#container'));
+  });
+});

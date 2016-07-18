@@ -7,16 +7,11 @@
 <h1>Battleship</h1>
 <div id="container"></div>
 <input type="checkbox" id="show-ships"/> Show ships?
+<br/>
+<button id="reset-game">Reset Game?</button>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var game = new BattleshipGame.Game($('#container'));
-    $('#show-ships').change(function() {
-      if ($(this).is(':checked')) {
-        $('.cell').addClass('show-ship')
-      } else {
-        $('.cell').removeClass('show-ship')
-      }
-    })
+    new BattleshipGame.Game($('#container'));
   })
 </script>
