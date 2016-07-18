@@ -33,18 +33,3 @@ _blankBoard = function() {
   }
   return grid;
 };
-
-//  // TODO clean up
-// Board.prototype.render = function() {
-//   // generate each ship and print it out
-//   this.ships.forEach(function(ship) {
-//     ship.coords.forEach(function(coord) {
-//       this.grid[coord[0]][coord[1]] = "x";
-//     }.bind(this));
-//   }.bind(this));
-//
-//   this.grid.forEach(function(row) {
-//     console.log(row);
-//   });
-//   console.log("");
-// };
