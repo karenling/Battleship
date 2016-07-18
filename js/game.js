@@ -67,7 +67,8 @@ Game.prototype.sinkShip = function(player, row, col) {
 
 Game.prototype.handleGameover = function() {
   this.togglePlayer();
-  $('.announcement').html(_humanizePlayer(this.currentPlayer) + " won!!");
+  $('.announcement').addClass('gameover')
+    .html(_humanizePlayer(this.currentPlayer) + " wins!");
   $('.board').addClass('disabled');
   this.handleGameClick.off();
 };
@@ -132,6 +133,7 @@ _toggleRevealShips = function() {
 $(document).ready(function() {
   $('#reset-game').click(function() {
     $('#container').html('');
+    $('.annoucement').removeClass('gameover');
     $('#show-ships').prop('checked', false);
     new BattleshipGame.Game($('#container'));
   });

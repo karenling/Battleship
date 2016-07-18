@@ -23,6 +23,10 @@ body {
   text-align: center;
   margin: 20px;
 }
+.announcement.gameover {
+  background-color: green;
+  color: white;
+}
 .board {
   display: inline-block;
   border-left: 1px solid #8dc6d3;
