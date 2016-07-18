@@ -39,7 +39,9 @@ Ship.prototype.areCoordsValid = function(potentialCoords) {
 Ship.prototype.generatePotentialShip = function() {
   var potentialStartPointX = _getRandomInt();
   var potentialStartPointY = _getRandomInt();
-  var potentialCoords = [[potentialStartPointX, potentialStartPointY]];
+  var potentialCoords = [
+    [potentialStartPointX, potentialStartPointY]
+  ];
   var newVal;
 
   if (this.direction === 'vertical') {

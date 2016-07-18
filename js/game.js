@@ -75,9 +75,9 @@ Game.prototype.handleGameover = function() {
 
 Game.prototype.blankBoard = function(player) {
   var board = $('<div>').addClass('board').attr('id', player);
-  for(var i = 0; i < 10; i++) {
+  for (var i = 0; i < 10; i++) {
     var $row = $('<div class="row"></div>');
-    for(var j = 0; j < 10; j++) {
+    for (var j = 0; j < 10; j++) {
       $row.append($('<div>')
         .addClass('cell row-' + j + ' col-' + i)
         .data('row', j).data('col', i));
@@ -95,17 +95,13 @@ Game.prototype.setupBoard = function(board) {
   this.addShips(board);
 };
 
-_humanizePlayer = function(currentPlayer) {
-  return (currentPlayer === 'player1' ? 'Player 1' : 'Player 2');
-};
-
 Game.prototype.playerTurnAnnouncement = function() {
   $('.announcement').html(_humanizePlayer(this.currentPlayer) + "'s turn");
 };
 
 Game.prototype.setupGame = function() {
   this.$el.prepend($('<div>')
-          .addClass("announcement"));
+    .addClass("announcement"));
   this.playerTurnAnnouncement();
   $('#player1').addClass('disabled');
   _toggleRevealShips();
@@ -118,6 +114,10 @@ Game.prototype.addShips = function(board) {
         .addClass('ship ship-' + idx);
     });
   });
+};
+
+_humanizePlayer = function(currentPlayer) {
+  return (currentPlayer === 'player1' ? 'Player 1' : 'Player 2');
 };
 
 _toggleRevealShips = function() {

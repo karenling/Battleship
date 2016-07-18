@@ -15,9 +15,16 @@ Board.prototype.sinkShip = function() {
   this.wounds++;
 };
 
+Board.prototype.generateShips = function() {
+  this.ships = [];
+  for (var i = 1; i <= 5; i++) {
+    this.ships.push(new BattleshipGame.Ship(this.ships, i));
+  }
+};
+
 _blankBoard = function() {
   var grid = [];
-  for(var i = 0; i < 10; i++) {
+  for (var i = 0; i < 10; i++) {
     var row = [];
     for (var j = 0; j < 10; j++) {
       row.push('.');
@@ -25,13 +32,6 @@ _blankBoard = function() {
     grid.push(row);
   }
   return grid;
-};
-
-Board.prototype.generateShips = function() {
-  this.ships = [];
-  for(var i=1; i <= 5; i++) {
-    this.ships.push(new BattleshipGame.Ship(this.ships, i));
-  }
 };
 
 //  // TODO clean up
